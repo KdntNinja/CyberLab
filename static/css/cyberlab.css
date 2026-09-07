@@ -1,0 +1,11 @@
+body {
+    min-height: 100vh;
+}
+
+.card {
+    transition: transform 0.15s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
