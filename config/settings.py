@@ -123,11 +123,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # CyberLab Apps
+    "accounts.apps.AccountsConfig",
+    "rooms.apps.RoomsConfig",
+    "progress.apps.ProgressConfig",
+    "challenges.apps.ChallengesConfig",
+    "leaderboard.apps.LeaderboardConfig",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    *(["whitenoise.middleware.WhiteNoiseMiddleware"] if IS_PRODUCTION else []),
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -238,14 +244,25 @@ STATICFILES_DIRS = [
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": ("whitenoise.storage.CompressedManifestStaticFilesStorage"),
-    },
-}
+
+def build_storages() -> dict[str, dict[str, str]]:
+    static_backend = (
+        "whitenoise.storage.CompressedManifestStaticFilesStorage"
+        if IS_PRODUCTION
+        else "django.contrib.staticfiles.storage.StaticFilesStorage"
+    )
+
+    return {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": static_backend,
+        },
+    }
+
+
+STORAGES = build_storages()
 
 
 # ---------------------------------------------------------------------------
