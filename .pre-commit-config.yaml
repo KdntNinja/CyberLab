@@ -24,7 +24,7 @@ repos:
 
       - id: pytest
         name: Pytest
-        entry: ./.venv/bin/pytest --suppress-no-test-exit-code
+        entry: ./.venv/bin/pytest
         language: system
         pass_filenames: false
         always_run: true
