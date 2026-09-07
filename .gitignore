@@ -9,3 +9,14 @@ htmlcov/
 .vscode/
 .env
 db.sqlite3
+
+# Django environment/secrets
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# Django generated/runtime data
+db.sqlite3
+staticfiles/
+media/

@@ -8,7 +8,11 @@ dependencies = [
     "django-bootstrap5>=26.3",
     "django-environ>=0.14.0",
     "docker>=7.2.0",
+    "gunicorn>=26.2.0",
+    "psycopg[binary]>=3.3.5",
     "pydantic>=2.13.5",
+    "python-dotenv>=1.2.3",
+    "whitenoise>=6.12.0",
 ]
 
 [dependency-groups]
