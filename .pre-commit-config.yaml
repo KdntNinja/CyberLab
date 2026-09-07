@@ -1,0 +1,30 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: Ruff
+        entry: ./.venv/bin/ruff check .
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: ruff-format
+        name: Ruff format
+        entry: ./.venv/bin/ruff format --check .
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: pyright
+        name: Pyright strict
+        entry: ./.venv/bin/pyright
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: pytest
+        name: Pytest
+        entry: ./.venv/bin/pytest --suppress-no-test-exit-code
+        language: system
+        pass_filenames: false
+        always_run: true
