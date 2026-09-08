@@ -36,12 +36,20 @@ addopts = [
     "-ra",
 ]
 
-
 [tool.pyright]
 typeCheckingMode = "strict"
 venvPath = "."
 venv = ".venv"
 pythonVersion = "3.13"
+
+[[tool.pyright.executionEnvironments]]
+root = "."
+extraPaths = ["."]
+
+[[tool.pyright.executionEnvironments]]
+root = "rooms"
+reportUnknownVariableType = false
+reportUnknownMemberType = false
 
 [tool.ruff]
 target-version = "py313"

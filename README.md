@@ -86,12 +86,12 @@ Run:
 
 ## 2. Accounts
 
-* [ ] Registration
-* [ ] Login
-* [ ] Logout
-* [ ] Profile page
-* [ ] Protected pages
-* [ ] Account tests
+* [x] Registration
+* [x] Login
+* [x] Logout
+* [x] Profile page
+* [x] Protected pages
+* [x] Account tests
 
 Done when:
 
