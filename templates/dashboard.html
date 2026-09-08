@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}Cyberlab{% endblock %}
+
+{% block content %}
+    <div class="py-4">
+        <div class="card mb-4">
+            <div class="card-body p-4 p-md-5">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8">
+                        <div class="page-pretitle mb-2">
+                            Cybersecurity training platform
+                        </div>
+
+                        <h1 class="display-5 fw-bold mb-3">
+                            Learn cybersecurity by doing.
+                        </h1>
+
+                        <p class="fs-3 text-secondary mb-4">
+                            Work through structured rooms, solve tasks,
+                            submit flags and launch isolated practical
+                            environments.
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <a
+                                    href="{% url 'room-list' %}"
+                                    class="btn btn-primary btn-lg"
+                            >
+                                Start learning
+                            </a>
+
+                            {% if request.user.is_authenticated %}
+                                <a
+                                        href="{% url 'profile' %}"
+                                        class="btn btn-outline-secondary btn-lg"
+                                >
+                                    View profile
+                                </a>
+                            {% else %}
+                                <a
+                                        href="{% url 'register' %}"
+                                        class="btn btn-outline-secondary btn-lg"
+                                >
+                                    Create account
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card bg-primary-lt border-0">
+                            <div class="card-body">
+                                <div class="text-secondary text-uppercase small fw-semibold mb-2">
+                                    Start here
+                                </div>
+
+                                <h2 class="card-title fs-2">
+                                    Introduction to Cyberlab
+                                </h2>
+
+                                <p class="text-secondary">
+                                    Learn how rooms, tasks, answers,
+                                    flags and hints work.
+                                </p>
+
+                                <a
+                                        href="{% url 'room-detail' 'introduction-to-cyberlab' %}"
+                                        class="btn btn-primary w-100"
+                                >
+                                    Open introduction
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center mb-3">
+            <div>
+                <h2 class="page-title">
+                    Explore Cyberlab
+                </h2>
+
+                <p class="text-secondary mb-0">
+                    Learn, practise and track your progress.
+                </p>
+            </div>
+        </div>
+
+        <div class="row row-cards">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            <span class="badge bg-blue-lt">
+                                Learn
+                            </span>
+                        </div>
+
+                        <h3 class="card-title fs-2">
+                            Rooms
+                        </h3>
+
+                        <p class="text-secondary flex-grow-1">
+                            Structured lessons containing information,
+                            questions, flags and practical tasks.
+                        </p>
+
+                        <a
+                                href="{% url 'room-list' %}"
+                                class="btn btn-primary align-self-start"
+                        >
+                            Browse rooms
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            <span class="badge bg-orange-lt">
+                                Practice
+                            </span>
+                        </div>
+
+                        <h3 class="card-title fs-2">
+                            Challenges
+                        </h3>
+
+                        <p class="text-secondary flex-grow-1">
+                            Launch isolated environments for hands-on
+                            cybersecurity exercises.
+                        </p>
+
+                        <div>
+                            <span class="badge bg-secondary-lt">
+                                Coming soon
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            <span class="badge bg-green-lt">
+                                Improve
+                            </span>
+                        </div>
+
+                        <h3 class="card-title fs-2">
+                            Progress
+                        </h3>
+
+                        <p class="text-secondary flex-grow-1">
+                            Track completed tasks, rooms and the points
+                            you earn.
+                        </p>
+
+                        <div>
+                            <span class="badge bg-secondary-lt">
+                                Coming soon
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -66,6 +66,16 @@ class Room(models.Model):
     class Meta:
         ordering = ("title",)
 
+    @property
+    def total_points(self) -> int:
+        return sum(
+            task.points
+            for task in Task.objects.filter(
+                room=self,
+                enabled=True,
+            )
+        )
+
     def __str__(self) -> str:
         return self.title
 

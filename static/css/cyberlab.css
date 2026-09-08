@@ -2,19 +2,15 @@ body {
     min-height: 100vh;
 }
 
-.card {
-    transition: transform 0.15s ease;
-}
-
-.card:hover {
-    transform: translateY(-2px);
+.page-body {
+    padding-bottom: 3rem;
 }
 
 .auth-page {
     display: flex;
-    justify-content: center;
+    min-height: 70vh;
     align-items: center;
-    min-height: 65vh;
+    justify-content: center;
 }
 
 .auth-card {
@@ -22,47 +18,10 @@ body {
     max-width: 480px;
 }
 
-.auth-card input[type="text"],
-.auth-card input[type="email"],
-.auth-card input[type="password"] {
-    display: block;
-    width: 100%;
-    padding: 0.6rem 0.75rem;
-    border: 1px solid var(--bs-border-color);
-    border-radius: var(--bs-border-radius);
-    background-color: var(--bs-body-bg);
-    color: var(--bs-body-color);
+details > summary {
+    list-style: none;
 }
 
-.auth-card input:focus {
-    border-color: var(--bs-primary);
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
-}
-
-.auth-card ul {
-    margin-top: 0.5rem;
-    margin-bottom: 0;
-    padding-left: 1.25rem;
-}
-
-.profile-avatar {
-    display: flex;
-    width: 64px;
-    height: 64px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: var(--bs-secondary-bg);
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.room-card {
-    transition: transform 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.room-card:hover {
-    transform: translateY(-3px);
+details > summary::-webkit-details-marker {
+    display: none;
 }

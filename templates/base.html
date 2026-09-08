@@ -1,13 +1,28 @@
 {% load static %}
-<!doctype html>
 
+<!doctype html>
 <html lang="en">
 <head>
+    <script>
+        (() => {
+            const savedTheme = localStorage.getItem("cyberlab-theme");
+
+            const theme = savedTheme ??
+                (window.matchMedia("(prefers-color-scheme: dark)").matches
+                    ? "dark"
+                    : "light");
+
+            document.documentElement.setAttribute(
+                "data-bs-theme",
+                theme,
+            );
+        })();
+    </script>
     <meta charset="utf-8">
 
     <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
+            name="viewport"
+            content="width=device-width, initial-scale=1"
     >
 
     <title>
@@ -15,83 +30,156 @@
     </title>
 
     <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-        crossorigin="anonymous"
+            rel="stylesheet"
+            href="{% static 'css/tabler.min.css' %}"
     >
 
     <link
-        rel="stylesheet"
-        href="{% static 'css/cyberlab.css' %}"
+            rel="stylesheet"
+            href="{% static 'css/cyberlab.css' %}"
     >
 </head>
 
 <body>
-    <header class="border-bottom">
-        <nav
-            class="container py-3 d-flex justify-content-between align-items-center"
-        >
+<div class="page">
+    <header class="navbar navbar-expand-md d-print-none">
+        <div class="container-xl">
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbar-menu"
+                    aria-controls="navbar-menu"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <a
-                class="fs-4 fw-semibold text-decoration-none text-body"
-                href="{% url 'home' %}"
+                    href="{% url 'home' %}"
+                    class="navbar-brand navbar-brand-autodark me-3"
             >
                 Cyberlab
             </a>
 
-            <div class="d-flex align-items-center gap-2">
-                {% if request.user.is_authenticated %}
-                    <a
-                        class="btn btn-outline-secondary btn-sm"
-                        href="{% url 'profile' %}"
+            <div
+                    class="collapse navbar-collapse"
+                    id="navbar-menu"
+            >
+                <ul class="navbar-nav">
+                    <li
+                            class="nav-item {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
                     >
-                        {{ request.user.username }}
+                        <a
+                                class="nav-link"
+                                href="{% url 'home' %}"
+                        >
+                                <span class="nav-link-title">
+                                    Dashboard
+                                </span>
+                        </a>
+                    </li>
+
+                    <li
+                            class="nav-item {% if request.resolver_match.url_name == 'room-list' or request.resolver_match.url_name == 'room-detail' %}active{% endif %}"
+                    >
+                        <a
+                                class="nav-link"
+                                href="{% url 'room-list' %}"
+                        >
+                                <span class="nav-link-title">
+                                    Rooms
+                                </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                            <span class="nav-link disabled">
+                                <span class="nav-link-title">
+                                    Challenges
+                                </span>
+                            </span>
+                    </li>
+
+                    <li class="nav-item">
+                            <span class="nav-link disabled">
+                                <span class="nav-link-title">
+                                    Progress
+                                </span>
+                            </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-item dropdown">
+                <a
+                        href="#"
+                        class="nav-link d-flex lh-1 p-0 px-2"
+                        data-bs-toggle="dropdown"
+                        aria-label="Open user menu"
+                >
+        <span class="avatar avatar-sm">
+            {{ request.user.username|first|upper }}
+        </span>
+
+                    <div class="d-none d-xl-block ps-2">
+                        <div>
+                            {{ request.user.username }}
+                        </div>
+
+                        <div class="mt-1 small text-secondary">
+                            Student
+                        </div>
+                    </div>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <a
+                            href="{% url 'profile' %}"
+                            class="dropdown-item"
+                    >
+                        Profile
                     </a>
 
                     {% if request.user.is_staff %}
                         <a
-                            class="btn btn-outline-secondary btn-sm"
-                            href="{% url 'admin:index' %}"
+                                href="{% url 'admin:index' %}"
+                                class="dropdown-item"
                         >
                             Admin
                         </a>
                     {% endif %}
 
+                    <div class="dropdown-divider"></div>
+
                     <form
-                        method="post"
-                        action="{% url 'logout' %}"
-                        class="m-0"
+                            method="post"
+                            action="{% url 'logout' %}"
                     >
                         {% csrf_token %}
 
                         <button
-                            type="submit"
-                            class="btn btn-outline-danger btn-sm"
+                                type="submit"
+                                class="dropdown-item text-danger"
                         >
                             Log out
                         </button>
                     </form>
-                {% else %}
-                    <a
-                        class="btn btn-outline-primary btn-sm"
-                        href="{% url 'login' %}"
-                    >
-                        Log in
-                    </a>
-
-                    <a
-                        class="btn btn-primary btn-sm"
-                        href="{% url 'register' %}"
-                    >
-                        Register
-                    </a>
-                {% endif %}
+                </div>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <main class="container py-5">
-        {% block content %}{% endblock %}
-    </main>
+    <div class="page-wrapper">
+        <div class="page-body">
+            <div class="container-xl">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/tabler.min.js' %}"></script>
 </body>
 </html>
