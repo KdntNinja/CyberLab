@@ -1,13 +1,11 @@
 from django.contrib import admin
 from django.urls import include, path
-from django.views.generic import TemplateView
+
+from . import views
 
 urlpatterns = [
-    path(
-        "",
-        TemplateView.as_view(template_name="dashboard.html"),
-        name="home",
-    ),
+    path("", views.home, name="home"),
+    path("dash/", views.dashboard, name="dashboard"),
     path("users/", include("accounts.urls")),
     path("rooms/", include("rooms.urls")),
     path("admin/", admin.site.urls),

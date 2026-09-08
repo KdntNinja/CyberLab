@@ -3,6 +3,13 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+    >
+
     <script>
         (() => {
             const savedTheme = localStorage.getItem("cyberlab-theme");
@@ -18,12 +25,6 @@
             );
         })();
     </script>
-    <meta charset="utf-8">
-
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1"
-    >
 
     <title>
         {% block title %}Cyberlab{% endblock %}
@@ -73,7 +74,7 @@
                     >
                         <a
                                 class="nav-link"
-                                href="{% url 'home' %}"
+                                href="{% url 'dashboard' %}"
                         >
                                 <span class="nav-link-title">
                                     Dashboard
@@ -112,61 +113,91 @@
                 </ul>
             </div>
 
-            <div class="nav-item dropdown">
-                <a
-                        href="#"
-                        class="nav-link d-flex lh-1 p-0 px-2"
-                        data-bs-toggle="dropdown"
-                        aria-label="Open user menu"
-                >
-        <span class="avatar avatar-sm">
-            {{ request.user.username|first|upper }}
-        </span>
+            <div class="navbar-nav flex-row order-md-last ms-auto align-items-center gap-2">
+                <div class="nav-item">
+                    <button
+                            type="button"
+                            class="btn btn-ghost-secondary btn-sm"
+                            id="theme-toggle"
+                    >
+                        Dark mode
+                    </button>
+                </div>
 
-                    <div class="d-none d-xl-block ps-2">
-                        <div>
-                            {{ request.user.username }}
-                        </div>
+                {% if request.user.is_authenticated %}
+                    <div class="nav-item dropdown">
+                        <a
+                                href="#"
+                                class="nav-link d-flex lh-1 p-0 px-2"
+                                data-bs-toggle="dropdown"
+                                aria-label="Open user menu"
+                        >
+                                <span class="avatar avatar-sm">
+                                    {{ request.user.username|first|upper }}
+                                </span>
 
-                        <div class="mt-1 small text-secondary">
-                            Student
+                            <div class="d-none d-xl-block ps-2">
+                                <div>
+                                    {{ request.user.username }}
+                                </div>
+
+                                <div class="mt-1 small text-secondary">
+                                    Student
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <a
+                                    href="{% url 'profile' %}"
+                                    class="dropdown-item"
+                            >
+                                Profile
+                            </a>
+
+                            {% if request.user.is_staff %}
+                                <a
+                                        href="{% url 'admin:index' %}"
+                                        class="dropdown-item"
+                                >
+                                    Admin
+                                </a>
+                            {% endif %}
+
+                            <div class="dropdown-divider"></div>
+
+                            <form
+                                    method="post"
+                                    action="{% url 'logout' %}"
+                            >
+                                {% csrf_token %}
+
+                                <button
+                                        type="submit"
+                                        class="dropdown-item text-danger"
+                                >
+                                    Log out
+                                </button>
+                            </form>
                         </div>
                     </div>
-                </a>
-
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a
-                            href="{% url 'profile' %}"
-                            class="dropdown-item"
-                    >
-                        Profile
-                    </a>
-
-                    {% if request.user.is_staff %}
+                {% else %}
+                    <div class="d-flex align-items-center">
                         <a
-                                href="{% url 'admin:index' %}"
-                                class="dropdown-item"
+                                href="{% url 'login' %}"
+                                class="btn btn-ghost-secondary btn-sm"
                         >
-                            Admin
+                            Log in
                         </a>
-                    {% endif %}
 
-                    <div class="dropdown-divider"></div>
-
-                    <form
-                            method="post"
-                            action="{% url 'logout' %}"
-                    >
-                        {% csrf_token %}
-
-                        <button
-                                type="submit"
-                                class="dropdown-item text-danger"
+                        <a
+                                href="{% url 'register' %}"
+                                class="btn btn-primary btn-sm"
                         >
-                            Log out
-                        </button>
-                    </form>
-                </div>
+                            Register
+                        </a>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </header>
@@ -181,5 +212,39 @@
 </div>
 
 <script src="{% static 'js/tabler.min.js' %}"></script>
+
+<script>
+    const themeToggle = document.getElementById("theme-toggle");
+
+    function updateThemeButton() {
+        const theme =
+            document.documentElement.getAttribute("data-bs-theme");
+
+        themeToggle.textContent =
+            theme === "dark" ? "Light mode" : "Dark mode";
+    }
+
+    themeToggle.addEventListener("click", () => {
+        const currentTheme =
+            document.documentElement.getAttribute("data-bs-theme");
+
+        const newTheme =
+            currentTheme === "dark" ? "light" : "dark";
+
+        document.documentElement.setAttribute(
+            "data-bs-theme",
+            newTheme,
+        );
+
+        localStorage.setItem(
+            "cyberlab-theme",
+            newTheme,
+        );
+
+        updateThemeButton();
+    });
+
+    updateThemeButton();
+</script>
 </body>
 </html>

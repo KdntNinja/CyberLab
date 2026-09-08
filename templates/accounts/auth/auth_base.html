@@ -1,0 +1,53 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+    >
+
+    <script>
+        (() => {
+            const savedTheme = localStorage.getItem("cyberlab-theme");
+
+            const theme = savedTheme ??
+                (window.matchMedia("(prefers-color-scheme: dark)").matches
+                    ? "dark"
+                    : "light");
+
+            document.documentElement.setAttribute(
+                "data-bs-theme",
+                theme,
+            );
+        })();
+    </script>
+
+    <title>
+        {% block title %}Cyberlab{% endblock %}
+    </title>
+
+    <link
+            rel="stylesheet"
+            href="{% static 'css/tabler.min.css' %}"
+    >
+
+    <link
+            rel="stylesheet"
+            href="{% static 'css/cyberlab.css' %}"
+    >
+</head>
+
+<body class="d-flex flex-column">
+<div class="page page-center">
+    <div class="container container-tight py-4">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+<script src="{% static 'js/tabler.min.js' %}"></script>
+</body>
+</html>

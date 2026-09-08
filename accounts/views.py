@@ -10,7 +10,7 @@ from accounts.forms import RegisterForm
 class Login(LoginView):
     """Log a user into Cyberlab."""
 
-    template_name = "accounts/login.html"
+    template_name = "accounts/auth/login.html"
     redirect_authenticated_user = True
 
 
@@ -29,7 +29,7 @@ def register(request: HttpRequest) -> HttpResponse:
 
     return render(
         request,
-        "accounts/register.html",
+        "accounts/auth/register.html",
         {"form": form},
     )
 

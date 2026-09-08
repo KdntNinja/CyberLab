@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block title %}Cyberlab{% endblock %}
+
+{% block content %}
+    <div class="py-5">
+        <section class="mb-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7">
+                    <div class="page-pretitle mb-2">
+                        Cybersecurity training platform
+                    </div>
+
+                    <h1 class="display-3 fw-bold mb-3">
+                        Learn cybersecurity by doing.
+                    </h1>
+
+                    <p class="fs-2 text-secondary mb-4">
+                        Work through structured rooms, solve tasks,
+                        submit flags and practise in isolated challenge
+                        environments.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        {% if request.user.is_authenticated %}
+                            <a
+                                    href="{% url 'dashboard' %}"
+                                    class="btn btn-primary btn-lg"
+                            >
+                                Open dashboard
+                            </a>
+
+                            <a
+                                    href="{% url 'room-list' %}"
+                                    class="btn btn-outline-secondary btn-lg"
+                            >
+                                Browse rooms
+                            </a>
+                        {% else %}
+                            <a
+                                    href="{% url 'register' %}"
+                                    class="btn btn-primary btn-lg"
+                            >
+                                Get started
+                            </a>
+
+                            <a
+                                    href="{% url 'login' %}"
+                                    class="btn btn-outline-secondary btn-lg"
+                            >
+                                Log in
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-status-top bg-primary"></div>
+
+                        <div class="card-body p-4">
+                            <div class="text-secondary text-uppercase small fw-semibold mb-2">
+                                How it works
+                            </div>
+
+                            <div class="d-flex gap-3 mb-4">
+                                <span class="avatar bg-blue-lt">
+                                    1
+                                </span>
+
+                                <div>
+                                    <h2 class="h3 mb-1">
+                                        Choose a room
+                                    </h2>
+
+                                    <p class="text-secondary mb-0">
+                                        Start with guided lessons covering
+                                        cybersecurity concepts.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-3 mb-4">
+                                <span class="avatar bg-purple-lt">
+                                    2
+                                </span>
+
+                                <div>
+                                    <h2 class="h3 mb-1">
+                                        Complete tasks
+                                    </h2>
+
+                                    <p class="text-secondary mb-0">
+                                        Answer questions, find flags and use
+                                        hints when you get stuck.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-3">
+                                <span class="avatar bg-green-lt">
+                                    3
+                                </span>
+
+                                <div>
+                                    <h2 class="h3 mb-1">
+                                        Practise
+                                    </h2>
+
+                                    <p class="text-secondary mb-0">
+                                        Launch isolated environments for
+                                        practical exercises.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-4">
+                <h2 class="page-title">
+                    What you can do
+                </h2>
+
+                <p class="text-secondary mb-0">
+                    Cyberlab combines guided learning with practical exercises.
+                </p>
+            </div>
+
+            <div class="row row-cards">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <span class="badge bg-blue-lt mb-3">
+                                Learn
+                            </span>
+
+                            <h3 class="card-title fs-2">
+                                Structured rooms
+                            </h3>
+
+                            <p class="text-secondary mb-0">
+                                Follow organised lessons containing
+                                explanations, questions, flags and hints.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <span class="badge bg-orange-lt mb-3">
+                                Practice
+                            </span>
+
+                            <h3 class="card-title fs-2">
+                                Practical challenges
+                            </h3>
+
+                            <p class="text-secondary mb-0">
+                                Use isolated challenge environments to
+                                practise techniques safely.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <span class="badge bg-green-lt mb-3">
+                                Improve
+                            </span>
+
+                            <h3 class="card-title fs-2">
+                                Track progress
+                            </h3>
+
+                            <p class="text-secondary mb-0">
+                                Earn points, complete rooms and see how
+                                your skills develop over time.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="card bg-primary-lt border-0">
+                <div class="card-body p-4 p-md-5">
+                    <div class="row align-items-center g-3">
+                        <div class="col">
+                            <h2 class="fs-1 fw-bold mb-2">
+                                Start with the Cyberlab introduction
+                            </h2>
+
+                            <p class="text-secondary mb-0">
+                                Learn how rooms, tasks, answers,
+                                flags, hints and points work.
+                            </p>
+                        </div>
+
+                        <div class="col-auto">
+                            {% if request.user.is_authenticated %}
+                                <a
+                                        href="{% url 'room-detail' 'introduction-to-cyberlab' %}"
+                                        class="btn btn-primary"
+                                >
+                                    Open introduction
+                                </a>
+                            {% else %}
+                                <a
+                                        href="{% url 'register' %}"
+                                        class="btn btn-primary"
+                                >
+                                    Create an account
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
