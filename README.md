@@ -24,7 +24,7 @@ The main focus is the platform and backend systems rather than creating lots of 
 
 ---
 
-# Development Rules
+## Development Rules
 
 Before committing:
 
@@ -49,7 +49,7 @@ Run:
 
 ---
 
-# Roadmap
+## Roadmap
 
 ## 0. Setup
 
@@ -250,7 +250,7 @@ Possible rooms:
 
 ---
 
-# Workflow
+## Workflow
 
 For each feature:
 
@@ -293,7 +293,7 @@ big update
 
 ---
 
-# Current Focus
+## Current Focus
 
 ## Working On
 
@@ -312,7 +312,7 @@ Nothing currently.
 
 ---
 
-# MVP
+## MVP
 
 The core project is complete when:
 
