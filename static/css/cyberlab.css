@@ -57,3 +57,12 @@ body {
     font-size: 1.5rem;
     font-weight: 600;
 }
+
+.room-card {
+    transition: transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.room-card:hover {
+    transform: translateY(-3px);
+}

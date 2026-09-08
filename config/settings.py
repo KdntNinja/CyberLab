@@ -196,10 +196,10 @@ DATABASES = build_databases()
 # ---------------------------------------------------------------------------
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": ("django.contrib.auth.password_validation.UserAttributeSimilarityValidator")},
-    {"NAME": ("django.contrib.auth.password_validation.MinimumLengthValidator")},
-    {"NAME": ("django.contrib.auth.password_validation.CommonPasswordValidator")},
-    {"NAME": ("django.contrib.auth.password_validation.NumericPasswordValidator")},
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 PASSWORD_HASHERS = [
@@ -278,12 +278,12 @@ CSRF_COOKIE_SECURE = IS_PRODUCTION
 SECURE_HSTS_SECONDS = env_int("DJANGO_HSTS_SECONDS", 3600) if IS_PRODUCTION else 0
 
 SECURE_HSTS_INCLUDE_SUBDOMAINS = (
-    env_bool("DJANGO_HSTS_INCLUDE_SUBDOMAINS", False) if IS_PRODUCTION else False
+    env_bool("DJANGO_HSTS_INCLUDE_SUBDOMAINS") if IS_PRODUCTION else False
 )
 
-SECURE_HSTS_PRELOAD = env_bool("DJANGO_HSTS_PRELOAD", False) if IS_PRODUCTION else False
+SECURE_HSTS_PRELOAD = env_bool("DJANGO_HSTS_PRELOAD") if IS_PRODUCTION else False
 
-TRUST_PROXY_HEADERS = IS_PRODUCTION and env_bool("DJANGO_TRUST_PROXY_HEADERS", False)
+TRUST_PROXY_HEADERS = IS_PRODUCTION and env_bool("DJANGO_TRUST_PROXY_HEADERS")
 
 SECURE_PROXY_SSL_HEADER: tuple[str, str] | None = (
     ("HTTP_X_FORWARDED_PROTO", "https") if TRUST_PROXY_HEADERS else None
@@ -297,5 +297,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.User"
 
 LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "profile"
+LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"

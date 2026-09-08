@@ -101,10 +101,10 @@ Done when:
 
 ## 3. Rooms and Tasks
 
-* [ ] Room model
-* [ ] Categories and difficulty
-* [ ] Room list
-* [ ] Room detail page
+* [x] Room model
+* [x] Categories and difficulty
+* [x] Room list
+* [x] Room detail page
 * [ ] Task model
 * [ ] Answer submission
 * [ ] Flag checking

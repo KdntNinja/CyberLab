@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}{{ room.title }} | Cyberlab{% endblock %}
+
+{% block content %}
+    <div class="mb-4">
+        <a
+                href="{% url 'room-list' %}"
+                class="text-decoration-none"
+        >
+            ← Back to rooms
+        </a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="mb-4">
+                <div class="d-flex gap-2 mb-3">
+                <span class="badge text-bg-secondary">
+                    {{ room.category.name }}
+                </span>
+
+                    {% if room.difficulty == "easy" %}
+                        <span class="badge text-bg-success">
+                        Easy
+                    </span>
+                    {% elif room.difficulty == "medium" %}
+                        <span class="badge text-bg-warning">
+                        Medium
+                    </span>
+                    {% elif room.difficulty == "hard" %}
+                        <span class="badge text-bg-danger">
+                        Hard
+                    </span>
+                    {% endif %}
+                </div>
+
+                <h1 class="display-5 fw-bold">
+                    {{ room.title }}
+                </h1>
+
+                <p class="lead text-body-secondary">
+                    {{ room.description }}
+                </p>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="h4">
+                        Tasks
+                    </h2>
+
+                    <p class="text-body-secondary mb-0">
+                        Tasks for this room will appear here once the task system is implemented.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">
+                        Room details
+                    </h2>
+
+                    <dl class="row mb-0">
+                        <dt class="col-6">
+                            Category
+                        </dt>
+
+                        <dd class="col-6 text-end">
+                            {{ room.category.name }}
+                        </dd>
+
+                        <dt class="col-6">
+                            Difficulty
+                        </dt>
+
+                        <dd class="col-6 text-end">
+                            {{ room.get_difficulty_display }}
+                        </dd>
+
+                        <dt class="col-6">
+                            Points
+                        </dt>
+
+                        <dd class="col-6 text-end">
+                            {{ room.points }}
+                        </dd>
+                    </dl>
+
+                    <hr>
+
+                    <button
+                            type="button"
+                            class="btn btn-primary w-100"
+                            disabled
+                    >
+                        Start room
+                    </button>
+
+                    <p class="small text-body-secondary text-center mt-2 mb-0">
+                        Challenge launching will be added later.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
