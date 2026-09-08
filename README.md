@@ -105,7 +105,7 @@ Done when:
 * [x] Categories and difficulty
 * [x] Room list
 * [x] Room detail page
-* [ ] Task model
+* [x] Task model
 * [ ] Answer submission
 * [ ] Flag checking
 * [ ] Hints

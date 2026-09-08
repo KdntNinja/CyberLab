@@ -21,6 +21,7 @@ class Category(models.Model):
 
     class Meta:
         ordering = ("name",)
+        verbose_name_plural = "Categories"
 
     def __str__(self) -> str:
         return self.name
@@ -50,10 +51,6 @@ class Room(models.Model):
         default=Difficulty.EASY,
     )
 
-    points: models.PositiveIntegerField[int, int] = models.PositiveIntegerField(
-        default=0,
-    )
-
     enabled: models.BooleanField[bool, bool] = models.BooleanField(
         default=False,
     )
@@ -68,6 +65,57 @@ class Room(models.Model):
 
     class Meta:
         ordering = ("title",)
+
+    def __str__(self) -> str:
+        return self.title
+
+
+class TaskType(models.TextChoices):
+    INFO = "info", "Information"
+    ANSWER = "answer", "Answer"
+    FLAG = "flag", "Flag"
+
+
+class Task(models.Model):
+    room: models.ForeignKey[Room, Room] = models.ForeignKey(
+        Room,
+        on_delete=models.CASCADE,
+        related_name="tasks",
+    )
+
+    title: models.CharField[str, str] = models.CharField(
+        max_length=100,
+    )
+
+    description: models.TextField[str, str] = models.TextField()
+
+    task_type: models.CharField[str, str] = models.CharField(
+        max_length=10, choices=TaskType, default=TaskType.ANSWER
+    )
+
+    answer: models.CharField[str, str] = models.CharField(
+        max_length=255,
+        blank=True,
+    )
+
+    points: models.PositiveIntegerField[int, int] = models.PositiveIntegerField(
+        default=10,
+    )
+
+    order: models.PositiveIntegerField[int, int] = models.PositiveIntegerField(
+        default=1,
+    )
+
+    hint: models.TextField[str, str] = models.TextField(
+        blank=True,
+    )
+
+    enabled: models.BooleanField[bool, bool] = models.BooleanField(
+        default=True,
+    )
+
+    class Meta:
+        ordering = ("order",)
 
     def __str__(self) -> str:
         return self.title
