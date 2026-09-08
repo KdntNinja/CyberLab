@@ -74,14 +74,10 @@ SECRET_KEY = required_env("DJANGO_SECRET_KEY")
 
 if IS_PRODUCTION:
     if len(SECRET_KEY) < 50:
-        raise RuntimeError(
-            "Production DJANGO_SECRET_KEY must be at least 50 characters long"
-        )
+        raise RuntimeError("Production DJANGO_SECRET_KEY must be at least 50 characters long")
 
     if SECRET_KEY.startswith("django-insecure-"):
-        raise RuntimeError(
-            "Do not use Django's generated insecure development key in production"
-        )
+        raise RuntimeError("Do not use Django's generated insecure development key in production")
 
 SECRET_KEY_FALLBACKS: list[str] = env_list("DJANGO_SECRET_KEY_FALLBACKS")
 
@@ -200,11 +196,7 @@ DATABASES = build_databases()
 # ---------------------------------------------------------------------------
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": (
-            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-        )
-    },
+    {"NAME": ("django.contrib.auth.password_validation.UserAttributeSimilarityValidator")},
     {"NAME": ("django.contrib.auth.password_validation.MinimumLengthValidator")},
     {"NAME": ("django.contrib.auth.password_validation.CommonPasswordValidator")},
     {"NAME": ("django.contrib.auth.password_validation.NumericPasswordValidator")},
@@ -299,3 +291,7 @@ SECURE_PROXY_SSL_HEADER: tuple[str, str] | None = (
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Custom user model
+AUTH_USER_MODEL = "accounts.User"

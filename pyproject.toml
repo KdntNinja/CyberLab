@@ -42,3 +42,25 @@ typeCheckingMode = "strict"
 venvPath = "."
 venv = ".venv"
 pythonVersion = "3.13"
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+force-exclude = true
+extend-exclude = [
+    "**/migrations/*.py",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "W",
+    "I",
+    "N",
+    "UP",
+    "B",
+    "SIM",
+    "C4",
+    "RUF",
+]
